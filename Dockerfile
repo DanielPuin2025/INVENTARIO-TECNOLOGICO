@@ -12,10 +12,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copiar requirements del backend
-COPY backend/requirements.txt ./backend/requirements.txt
+COPY requirements.txt ./requirements.txt
 
 # Instalar dependencias de Python
-RUN pip install --no-cache-dir -r backend/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar código de la aplicación
 COPY backend/ ./backend/
