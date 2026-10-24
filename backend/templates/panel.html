@@ -2506,9 +2506,9 @@
     return ["administrador", "encargado"].includes(rolActual);
   }
 
-  const API_URL = window.location.port === "5000"
-    ? ""
-    : `${window.location.protocol}//${window.location.hostname}:5000`;
+  const API_URL = (window.location.protocol === "file:" || window.location.port === "5500")
+    ? `http://${window.location.hostname || "localhost"}:5000`
+    : "";
 
   const opcionesFetch = { credentials: "include" };
 

@@ -340,11 +340,11 @@
 <script>
   const formMessage = document.getElementById('form-message');
 
-  // Usa el mismo origen cuando Flask sirve la página y Flask directamente
-  // cuando la página se abre desde Live Server o como archivo local.
-  const API_URL = window.location.port === '5000'
-    ? ''
-    : `${window.location.protocol}//${window.location.hostname}:5000`;
+  // Mismo origen cuando Flask sirve la página (local o detrás de un proxy);
+  // Flask en :5000 solo si se abre desde Live Server o como archivo local.
+  const API_URL = (window.location.protocol === 'file:' || window.location.port === '5500')
+    ? `http://${window.location.hostname || 'localhost'}:5000`
+    : '';
 
   function setFormMessage(state, mensaje){
     formMessage.className = `form-message${state ? ` ${state}` : ''}`;
