@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario Tecnológico Cusiana</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0b1324;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: #111f37;
+      border: 1px solid #203558;
+      border-radius: 16px;
+      padding: 36px 42px;
+      max-width: 480px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    h1 {
+      font-size: 22px;
+      margin: 0 0 12px;
+      color: #22c7d8;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 24px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #22c7d8;
+      color: #0b1324;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background .2s;
+    }
+    .btn:hover {
+      background: #1aaec2;
+    }
+    .hint {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Inventario Tecnológico Cusiana</h1>
+    <p id="mensaje">Abriendo la aplicación Flask en el puerto 5000...</p>
+    <a id="enlace" href="http://localhost:5000/" class="btn">Abrir Inventario</a>
+    <div class="hint">
+      Si el servidor no está encendido, ejecuta <strong>iniciar.bat</strong> o <strong>python app.py</strong>.
+    </div>
+  </div>
+  <script>
+    const host = window.location.hostname || "localhost";
+    const appUrl = `http://${host}:5000/`;
+    document.getElementById("enlace").href = appUrl;
+    window.setTimeout(() => window.location.replace(appUrl), 1000);
+  </script>
+</body>
+</html>

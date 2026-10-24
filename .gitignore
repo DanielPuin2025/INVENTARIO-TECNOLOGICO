@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+.venv-*/
+**/.venv*/
+venv/
+env/
+
+# Archivos sensibles
+.env
+*.db
+
+# Base de datos
+backend/database/inventario.sql
+inventario.sql
+
+# Uploads y archivos generados
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/imagenes/*
+!backend/imagenes/.gitkeep
+
+# Testing
+.pytest_cache/
+
+# IDE
+.vscode/*.log
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Archivos locales de Windows
+*.bat
+iniciar.bat
+archive/
+
+# Logs
+*.log

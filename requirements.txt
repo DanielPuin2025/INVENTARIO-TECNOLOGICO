@@ -1,0 +1,7 @@
+flask
+flask-cors
+werkzeug
+mysql-connector-python
+waitress
+python-dotenv
+
