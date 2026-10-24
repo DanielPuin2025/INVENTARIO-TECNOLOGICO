@@ -11,17 +11,18 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
-# Copiar requirements
-COPY requirements.txt .
+# Copiar requirements del backend
+COPY backend/requirements.txt ./backend/requirements.txt
 
 # Instalar dependencias de Python
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r backend/requirements.txt
 
 # Copiar código de la aplicación
-COPY . .
+COPY backend/ ./backend/
+COPY inventario.sql ./inventario.sql
 
 # Crear directorios necesarios
-RUN mkdir -p backend/uploads backend/imagenes backend/static backend/templates
+RUN mkdir -p backend/uploads backend/imagenes
 
 # Exponer puerto
 EXPOSE 5000
@@ -29,5 +30,6 @@ EXPOSE 5000
 # Variables de entorno por defecto
 ENV PYTHONUNBUFFERED=1
 
-# Comando para iniciar la aplicación
+# Cambiar al directorio backend y ejecutar
+WORKDIR /app/backend
 CMD ["python", "app.py"]
