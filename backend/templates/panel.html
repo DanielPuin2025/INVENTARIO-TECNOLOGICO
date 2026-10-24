@@ -1899,10 +1899,16 @@
       <p class="subtitle" id="subtitulo-panel">Equipos tecnológicos del colegio.</p>
     </div>
 
-    <button class="primary" id="boton-registrar-equipo" onclick="registrarEquipo()">
-      <span>＋</span>
-      Registrar equipo
-    </button>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <button class="primary" id="boton-registrar-equipo" onclick="registrarEquipo()">
+        <span>＋</span>
+        Registrar equipo
+      </button>
+      <button class="primary" onclick="abrirCreadores()" style="background: linear-gradient(135deg, #ec5ea6 0%, #d73d8f 100%); box-shadow: 0 12px 26px rgba(236, 94, 166, 0.26);">
+        <span>👥</span>
+        Ver creadores
+      </button>
+    </div>
     <p class="role-note">Consulta en tiempo real del inventario y sus ubicaciones.</p>
   </div>
 
@@ -2482,6 +2488,23 @@
 
     <div id="d-historial"></div>
 
+  </div>
+</div>
+
+<!-- MODAL DE CREADORES -->
+<div class="modal" id="modal-creadores" role="dialog" aria-modal="true" aria-labelledby="creadores-titulo">
+  <div class="modal-card" style="max-width: 900px;">
+    <div class="modal-top">
+      <div>
+        <h2 id="creadores-titulo">Creadores del Sistema</h2>
+        <p>Equipo de desarrollo del Inventario Tecnológico</p>
+      </div>
+      <button class="modal-close" type="button" onclick="cerrarCreadores()" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div style="text-align: center; padding: 20px 0;">
+      <img src="/static/image.png" alt="Creadores del sistema" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: var(--shadow-md);">
+    </div>
   </div>
 </div>
 
@@ -3869,8 +3892,21 @@
     if (e.key === "Escape") {
       cerrarDrawer();
       cerrarModalEquipo();
+      cerrarCreadores();
     }
 
+  });
+
+  function abrirCreadores() {
+    document.getElementById("modal-creadores").classList.add("open");
+  }
+
+  function cerrarCreadores() {
+    document.getElementById("modal-creadores").classList.remove("open");
+  }
+
+  document.getElementById("modal-creadores").addEventListener("click", event => {
+    if (event.target.id === "modal-creadores") cerrarCreadores();
   });
 
   cargarPanel();
