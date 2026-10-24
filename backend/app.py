@@ -55,6 +55,7 @@ app.config["SESSION_COOKIE_SECURE"] = os.environ.get(
     "INVENTARIO_COOKIE_SECURE", "0"
 ) == "1"
 import re
+from urllib.parse import urlparse
 
 PATRON_ORIGEN_LOCAL = re.compile(
     r"^https?:\/\/(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[0-1])\.\d{1,3}\.\d{1,3})(:\d+)?$"
@@ -72,7 +73,16 @@ def validar_origen_solicitud():
     if request.method in {"POST", "PUT", "PATCH", "DELETE"}:
         origen = request.headers.get("Origin")
         if origen and not PATRON_ORIGEN_LOCAL.match(origen):
-            return jsonify({"error": "Origen no permitido"}), 403
+            # Mismo origen (p. ej. dominio público detrás de un proxy) es válido.
+            host_origen = urlparse(origen).netloc.lower()
+            hosts_validos = {request.host.lower()}
+            hosts_validos.update(
+                h.strip().lower()
+                for h in os.environ.get("INVENTARIO_ALLOWED_HOSTS", "").split(",")
+                if h.strip()
+            )
+            if host_origen not in hosts_validos:
+                return jsonify({"error": "Origen no permitido"}), 403
 
 
 @app.after_request
