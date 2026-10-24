@@ -19,7 +19,6 @@ RUN pip install --no-cache-dir -r backend/requirements.txt
 
 # Copiar código de la aplicación
 COPY backend/ ./backend/
-COPY inventario.sql ./inventario.sql
 
 # Crear directorios necesarios
 RUN mkdir -p backend/uploads backend/imagenes
